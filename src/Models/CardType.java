@@ -1,3 +1,5 @@
+package Models;
+
 public class CardType {
     private int ID;
     private String Typename;
