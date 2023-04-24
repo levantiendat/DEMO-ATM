@@ -4,17 +4,15 @@ public class Card {
     private String CardID;
     private String Password;
     private String AccountID;
-    private int Type;
     private double Amount;
 
     public Card() {
     }
 
-    public Card(String cardID, String password, String accountID, int type, double amount) {
+    public Card(String cardID, String password, String accountID, double amount) {
         CardID = cardID;
         Password = password;
         AccountID = accountID;
-        Type = type;
         Amount = amount;
     }
 
@@ -42,13 +40,6 @@ public class Card {
         AccountID = accountID;
     }
 
-    public int getType() {
-        return Type;
-    }
-
-    public void setType(int type) {
-        Type = type;
-    }
 
     public double getAmount() {
         return Amount;
