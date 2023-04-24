@@ -18,7 +18,7 @@ public class LoginView extends JFrame implements ActionListener {
     }
 
     public void GUI(){
-        lb1=new JLabel("HỆ THỐNG NGÂN HÀNG SỐ DZACH");
+        lb1=new JLabel("HE THONG NGAN HANG");
         lb2=new JLabel("CARD NUMBER: ");
         lb3=new JLabel("CARD PIN: ");
         txtCard=new JTextField(5);
