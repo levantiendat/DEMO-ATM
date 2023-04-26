@@ -20,17 +20,17 @@ public class MainView  extends JFrame implements ActionListener {
         txtName.enable(false);
         txtName.setPreferredSize(new Dimension(250, 50));
         btnWithDraw =new JButton("WithDraw");
-        btnWithDraw.setPreferredSize(new Dimension(150, 50));
-        btnShow=new JButton("Show Amount");
-        btnShow.setPreferredSize(new Dimension(150, 50));
+        btnWithDraw.setPreferredSize(new Dimension(180, 50));
+        btnShow=new JButton("Show Account Balance");
+        btnShow.setPreferredSize(new Dimension(180, 50));
         btnPinChange=new JButton("Change Card Pin");
-        btnPinChange.setPreferredSize(new Dimension(150, 50));
+        btnPinChange.setPreferredSize(new Dimension(180, 50));
         btnDeposit=new JButton("Deposit");
-        btnDeposit.setPreferredSize(new Dimension(150, 50));
+        btnDeposit.setPreferredSize(new Dimension(180, 50));
         btnView=new JButton("View Information");
-        btnView.setPreferredSize(new Dimension(150, 50));
+        btnView.setPreferredSize(new Dimension(180, 50));
         btnLogOut=new JButton("Log out");
-        btnLogOut.setPreferredSize(new Dimension(150, 50));
+        btnLogOut.setPreferredSize(new Dimension(180, 50));
 
         btnWithDraw.setBackground(Color.black);
         btnWithDraw.setForeground(Color.white);
