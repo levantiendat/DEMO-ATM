@@ -12,8 +12,7 @@ public class ConnectData {
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
-            //url: jdbc:mysql://127.0.0.1:3306/data
-            //sql: Select * from table1
+
             String url1="jdbc:mysql://127.0.0.1:3306/data";
             Connection con= DriverManager.getConnection(url1,"root","");
             Statement stmt =con.createStatement();
