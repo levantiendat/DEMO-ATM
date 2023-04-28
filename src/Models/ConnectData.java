@@ -57,10 +57,8 @@ public class ConnectData {
 
             res.close();
             stmt.close();
-            return s;
+            return null;
         }
-
-
     }
     public Customer GetCustomer(Card p) throws SQLException {
         Customer s=new Customer();
@@ -80,13 +78,32 @@ public class ConnectData {
             return s;
         }
         else{
+            res.close();
+            stmt.close();
+            return null;
+        }
+    }
+    public Account showAccount(Card p) throws SQLException {
+        Account s=new Account();
+        //query
+        String query=String.format("Select * from account where Account_ID='%s'",p.getAccountID());
+        ResultSet res=stmt.executeQuery(query);
 
+        if(res.next()){
+
+            s.setID(res.getString("Account_ID"));
+            s.setBankName(res.getString("Bank"));
+            s.setCustomerID(res.getInt("Customer_ID"));
 
             res.close();
             stmt.close();
             return s;
         }
+        else{
+            res.close();
+            stmt.close();
+            return null;
+        }
     }
-
 
 }

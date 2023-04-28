@@ -2,6 +2,7 @@ package Views;
 
 import Controllers.MainController;
 import Models.Card;
+import Models.Customer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +13,10 @@ import java.sql.SQLException;
 
 public class MainView  extends JFrame implements ActionListener {
     private JButton btnWithDraw, btnShow, btnPinChange, btnDeposit, btnView, btnLogOut;
-    private JTextField txtName;
+    private JLabel txtName;
     private JPanel pn,pn1,pn2,pn3,pn4;
     Card card;
+    Customer customer;
 
     public MainView(String s, Card card1) throws SQLException {
         super(s);
@@ -23,9 +25,7 @@ public class MainView  extends JFrame implements ActionListener {
 
     }
     public void GUI() throws SQLException {
-        txtName=new JTextField(4);
-        txtName.enable(false);
-        txtName.setPreferredSize(new Dimension(250, 50));
+        txtName=new JLabel("");
         btnWithDraw =new JButton("WithDraw");
         btnWithDraw.setPreferredSize(new Dimension(180, 50));
         btnShow=new JButton("Show Account Balance");
@@ -93,7 +93,8 @@ public class MainView  extends JFrame implements ActionListener {
     }
     public void setName() throws SQLException {
         MainController controller=new MainController();
-        txtName.setText(controller.getCustomer(card).getName());
+        customer=controller.getCustomer(card);
+        txtName.setText(String.format("Welcome, %s!",customer.getName()));
     }
 
     public void windowClosing(WindowEvent we) {
@@ -102,6 +103,33 @@ public class MainView  extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource()==btnDeposit){
+            DepositView deposit=new DepositView("Deposit Money");
+            dispose();
+        }
+        if(e.getSource()==btnView){
+            try {
+                DetailView view=new DetailView("Detail View",customer,card);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            dispose();
+        }
+        if(e.getSource()==btnLogOut){
+            LoginView lg=new LoginView("Login View");
+            dispose();
+        }
+        if(e.getSource()==btnWithDraw){
+            WithDrawView deposit=new WithDrawView("Withdraw Money");
+            dispose();
+        }
+        if(e.getSource()==btnShow){
+            ShowMoneyView show=new ShowMoneyView("Show money",card);
+            dispose();
+        }
+        if(e.getSource()==btnPinChange){
+            PinChangeView pin=new PinChangeView("Pin charge");
+            dispose();
+        }
     }
 }

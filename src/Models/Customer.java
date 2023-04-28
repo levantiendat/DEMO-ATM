@@ -1,7 +1,6 @@
 package Models;
 
 import java.sql.Date;
-import java.util.Calendar;
 
 public class Customer {
     private int ID;
@@ -17,6 +16,12 @@ public class Customer {
         Name = name;
         DateOfBirth = dateOfBirth;
         CitizenID = citizenID;
+    }
+    public Customer(Customer s1){
+        ID = s1.ID;
+        Name = s1.Name;
+        DateOfBirth = s1.DateOfBirth;
+        CitizenID = s1.CitizenID;
     }
 
     public int getID() {

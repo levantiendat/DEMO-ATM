@@ -1,19 +1,30 @@
 package Views;
 
+import Controllers.DetailController;
+import Models.Account;
+import Models.Card;
+import Models.Customer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 public class DetailView  extends JFrame implements ActionListener {
     private JLabel lb1,lb2,lb3,lb4;
     private JTextField txtName,txtDate,txtCCCD,txtBank;
     private JButton btnBack;
     private JPanel pn,pn1,pn2,pn3,pn4,pn5;
-    public DetailView(String s){
+    Customer customer;
+    Card card;
+    public DetailView(String s,Customer s1,Card s2) throws SQLException {
         super(s);
+        customer=new Customer(s1);
+        card=new Card(s2);
         GUI();
+        getData();
     }
     public void GUI(){
         lb1=new JLabel("Họ tên khách hàng: ");
@@ -36,6 +47,15 @@ public class DetailView  extends JFrame implements ActionListener {
         btnBack.setBackground(Color.black);
         btnBack.setForeground(Color.white);
         btnBack.addActionListener(this);
+
+        txtName.setFont(new Font("Arial",Font.BOLD,20));
+        txtDate.setFont(new Font("Arial",Font.BOLD,20));
+        txtCCCD.setFont(new Font("Arial",Font.BOLD,20));
+        txtBank.setFont(new Font("Arial",Font.BOLD,20));
+
+
+
+
 
         pn=new JPanel(new GridLayout(5,1));
         pn1=new JPanel(new GridLayout(1,2));
@@ -68,12 +88,28 @@ public class DetailView  extends JFrame implements ActionListener {
         show();
 
     }
+    public void getData() throws SQLException {
+        DetailController controller=new DetailController();
+        Account acc=controller.getAccount(card);
+        txtName.setText(customer.getName());
+        txtDate.setText(customer.getDateOfBirth().toString());
+        txtCCCD.setText(customer.getCitizenID());
+        txtBank.setText(acc.getBankName());
+
+    }
     public void windowClosing(WindowEvent we) {
         dispose();
         System.exit(0);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource()==btnBack){
+            try {
+                MainView mv=new MainView("Main View",card);
+                dispose();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 }

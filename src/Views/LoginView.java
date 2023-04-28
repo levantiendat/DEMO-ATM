@@ -12,7 +12,8 @@ import java.sql.SQLException;
 
 public class LoginView extends JFrame implements ActionListener {
     private JLabel lb1,lb2,lb3;
-    private JTextField txtCard,txtPass;
+    private JTextField txtCard;
+    private JPasswordField txtPass;
     private JButton btnOK,btnReset;
     private JPanel pn,pn0,pn1,pn2,pn3;
 
@@ -27,7 +28,8 @@ public class LoginView extends JFrame implements ActionListener {
         lb3=new JLabel("CARD PIN: ");
         txtCard=new JTextField(5);
         txtCard.setBounds(0,0,200,15);
-        txtPass=new JTextField(5);
+        txtPass=new JPasswordField(5);
+        txtPass.setEchoChar('*');
         txtPass.setBounds(0,0,200,15);
         btnOK=new JButton("OK");
         btnOK.setBackground(Color.black);
@@ -37,6 +39,7 @@ public class LoginView extends JFrame implements ActionListener {
         btnReset.setForeground(Color.white);
         btnOK.addActionListener(this);
         btnReset.addActionListener(this);
+
 
         pn=new JPanel(new GridLayout(5,1));
         pn0=new JPanel(new FlowLayout());
