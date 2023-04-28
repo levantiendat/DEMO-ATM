@@ -1,10 +1,14 @@
 package Views;
 
+import Controllers.LoginController;
+import Models.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 public class LoginView extends JFrame implements ActionListener {
     private JLabel lb1,lb2,lb3;
@@ -73,6 +77,22 @@ public class LoginView extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource()==btnOK){
+            String CardNumber=txtCard.getText().toString();
+            String Password=txtPass.getText().toString();
+            LoginController controller=new LoginController();
+            Card s= null;
+            try {
+                s = controller.CheckAccount(CardNumber,Password);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            if(s!=null){
+                JOptionPane.showMessageDialog(this,String.format("Login Successfully with %f",s.getAmount()));
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Invalid account");
+            }
+        }
     }
 }
