@@ -62,7 +62,31 @@ public class ConnectData {
 
 
     }
+    public Customer GetCustomer(Card p) throws SQLException {
+        Customer s=new Customer();
+        //query
+        String query=String.format("Select * from customer join account on account.Customer_ID=customer.Customer_ID where account.Account_ID='%s'",p.getAccountID());
+        ResultSet res=stmt.executeQuery(query);
 
+        if(res.next()){
+
+            s.setID(res.getInt("Customer_ID"));
+            s.setName(res.getString("Name"));
+            s.setDateOfBirth(res.getDate("DateOfBirth"));
+            s.setCitizenID(res.getString("Citizen"));
+
+            res.close();
+            stmt.close();
+            return s;
+        }
+        else{
+
+
+            res.close();
+            stmt.close();
+            return s;
+        }
+    }
 
 
 }

@@ -81,14 +81,19 @@ public class LoginView extends JFrame implements ActionListener {
             String CardNumber=txtCard.getText().toString();
             String Password=txtPass.getText().toString();
             LoginController controller=new LoginController();
-            Card s= null;
+            Card s;
             try {
                 s = controller.CheckAccount(CardNumber,Password);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
             if(s!=null){
-                JOptionPane.showMessageDialog(this,String.format("Login Successfully with %f",s.getAmount()));
+                try {
+                    MainView mv=new MainView("Main View",s);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                dispose();
             }
             else{
                 JOptionPane.showMessageDialog(this,"Invalid account");

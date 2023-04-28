@@ -1,21 +1,28 @@
 package Views;
 
+import Controllers.MainController;
+import Models.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 public class MainView  extends JFrame implements ActionListener {
     private JButton btnWithDraw, btnShow, btnPinChange, btnDeposit, btnView, btnLogOut;
     private JTextField txtName;
     private JPanel pn,pn1,pn2,pn3,pn4;
+    Card card;
 
-    public MainView(String s){
+    public MainView(String s, Card card1) throws SQLException {
         super(s);
+        card=new Card(card1);
         GUI();
+
     }
-    public void GUI(){
+    public void GUI() throws SQLException {
         txtName=new JTextField(4);
         txtName.enable(false);
         txtName.setPreferredSize(new Dimension(250, 50));
@@ -51,6 +58,8 @@ public class MainView  extends JFrame implements ActionListener {
         btnDeposit.addActionListener(this);
         btnView.addActionListener(this);
         btnLogOut.addActionListener(this);
+        setName();
+
 
 
         pn=new JPanel(new GridLayout(5,1));
@@ -82,6 +91,11 @@ public class MainView  extends JFrame implements ActionListener {
 
 
     }
+    public void setName() throws SQLException {
+        MainController controller=new MainController();
+        txtName.setText(controller.getCustomer(card).getName());
+    }
+
     public void windowClosing(WindowEvent we) {
         dispose();
         System.exit(0);

@@ -16,6 +16,13 @@ public class Card {
         Amount = amount;
     }
 
+    public Card(Card card1) {
+        CardID = card1.CardID;
+        Password = card1.Password;
+        AccountID = card1.AccountID;
+        Amount = card1.Amount;
+    }
+
     public String getCardID() {
         return CardID;
     }

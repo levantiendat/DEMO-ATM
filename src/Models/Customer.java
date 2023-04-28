@@ -1,17 +1,18 @@
 package Models;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 public class Customer {
     private int ID;
     private String Name;
-    private Calendar DateOfBirth;
+    private Date DateOfBirth;
     private String CitizenID;
 
     public Customer() {
     }
 
-    public Customer(int ID, String name, Calendar dateOfBirth, String citizenID) {
+    public Customer(int ID, String name, Date dateOfBirth, String citizenID) {
         this.ID = ID;
         Name = name;
         DateOfBirth = dateOfBirth;
@@ -34,11 +35,11 @@ public class Customer {
         Name = name;
     }
 
-    public Calendar getDateOfBirth() {
+    public Date getDateOfBirth() {
         return DateOfBirth;
     }
 
-    public void setDateOfBirth(Calendar dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         DateOfBirth = dateOfBirth;
     }
 
