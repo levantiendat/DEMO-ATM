@@ -15,7 +15,7 @@ public class MainView  extends JFrame implements ActionListener {
     private JButton btnWithDraw, btnShow, btnPinChange, btnDeposit, btnView, btnLogOut;
     private JLabel txtName;
     private JPanel pn,pn1,pn2,pn3,pn4;
-    Card card;
+    private Card card;
     Customer customer;
 
     public MainView(String s, Card card1) throws SQLException {
@@ -104,7 +104,7 @@ public class MainView  extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnDeposit){
-            DepositView deposit=new DepositView("Deposit Money");
+            DepositView deposit=new DepositView("Deposit Money",card);
             dispose();
         }
         if(e.getSource()==btnView){
@@ -120,7 +120,7 @@ public class MainView  extends JFrame implements ActionListener {
             dispose();
         }
         if(e.getSource()==btnWithDraw){
-            WithDrawView deposit=new WithDrawView("Withdraw Money");
+            WithDrawView deposit=new WithDrawView("Withdraw Money",card);
             dispose();
         }
         if(e.getSource()==btnShow){
@@ -128,7 +128,7 @@ public class MainView  extends JFrame implements ActionListener {
             dispose();
         }
         if(e.getSource()==btnPinChange){
-            PinChangeView pin=new PinChangeView("Pin charge");
+            PinChangeView pin=new PinChangeView("Pin charge",card);
             dispose();
         }
     }

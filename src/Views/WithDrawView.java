@@ -1,20 +1,26 @@
 package Views;
 
+import Controllers.WithDrawController;
+import Models.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 public class WithDrawView extends JFrame implements ActionListener {
 
     private JLabel lb1;
     private JTextField txtNum;
-    private JButton btnOK,btnReset;
+    private JButton btnOK,btnCancel;
     private JPanel pn,pn0,pn1,pn3;
+    Card card;
 
-    public WithDrawView(String s)  {
+    public WithDrawView(String s, Card s1)  {
         super(s);
+        card=new Card(s1);
         GUI();
     }
 
@@ -28,11 +34,11 @@ public class WithDrawView extends JFrame implements ActionListener {
         btnOK=new JButton("OK");
         btnOK.setBackground(Color.black);
         btnOK.setForeground(Color.white);
-        btnReset=new JButton("RESET");
-        btnReset.setBackground(Color.black);
-        btnReset.setForeground(Color.white);
+        btnCancel=new JButton("CANCEL");
+        btnCancel.setBackground(Color.black);
+        btnCancel.setForeground(Color.white);
         btnOK.addActionListener(this);
-        btnReset.addActionListener(this);
+        btnCancel.addActionListener(this);
 
         pn=new JPanel(new GridLayout(5,1));
         pn0=new JPanel(new FlowLayout());
@@ -45,7 +51,7 @@ public class WithDrawView extends JFrame implements ActionListener {
 
         pn3=new JPanel(new FlowLayout());
         pn3.add(btnOK);
-        pn3.add(btnReset);
+        pn3.add(btnCancel);
 
         pn.add(new Label());
         pn.add(pn0);
@@ -65,6 +71,50 @@ public class WithDrawView extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnOK){
+            int input= JOptionPane.showConfirmDialog(this,"Do you confirm to withdraw these money");
+            if(input==0){
+                try {
+                    double amount = Double.parseDouble(txtNum.getText());
+                    if(amount<=0){
+                        JOptionPane.showMessageDialog(this,"Your information is not valid");
+                    }
+                    else{
+                        if(amount>card.getAmount()){
+                            JOptionPane.showMessageDialog(this,"Your available money is not enough to withdraw for these money !");
+                        }
+                        else{
+                            try{
+                                card.setAmount(card.getAmount()-amount);
+                                WithDrawController controller=new WithDrawController();
+                                controller.withdraw(card);
+                                JOptionPane.showMessageDialog(this,String.format("With draw successfully, your new amount is %.2f",card.getAmount()));
+                                MainView view=new MainView("Main View",card);
+                                dispose();
+                            }
+                            catch(Exception t){
+                                System.out.println(t);
+                            }
 
+
+                        }
+                    }
+
+                }
+                catch(Exception p){
+                    JOptionPane.showMessageDialog(this,"Your input information is not valid");
+                }
+
+            }
+        }
+        if(e.getSource()==btnCancel){
+            try {
+                MainView view=new MainView("Main View",card);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            dispose();
+
+        }
     }
 }

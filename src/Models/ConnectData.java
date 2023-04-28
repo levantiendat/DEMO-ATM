@@ -28,12 +28,6 @@ public class ConnectData {
             System.out.println(e);
         }
     }
-    public void executeSQL(String sql){
-
-    }
-    public double printAmount(String cardnumber){
-        return 0;
-    }
     public Card checkAccount(String cardNumber,String Password) throws SQLException {
         Card s=new Card();
         //query
@@ -103,6 +97,26 @@ public class ConnectData {
             res.close();
             stmt.close();
             return null;
+        }
+    }
+    public void changePassword(Card s){
+        try {
+            String query = String.format("Update card SET Pin='%s' where Card_ID='%s'", s.getPassword(), s.getCardID());
+            stmt.executeUpdate(query);
+            stmt.close();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public void changeAmount(Card s){
+        try {
+            String query = String.format("Update card SET Amount='%s' where Card_ID='%s'", s.getAmount(), s.getCardID());
+            stmt.executeUpdate(query);
+            stmt.close();
+        }
+        catch (Exception e){
+            System.out.println(e);
         }
     }
 
