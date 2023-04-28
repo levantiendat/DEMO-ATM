@@ -102,5 +102,9 @@ public class LoginView extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this,"Invalid account");
             }
         }
+        if(e.getSource()==btnReset){
+            txtCard.setText("");
+            txtPass.setText("");
+        }
     }
 }
